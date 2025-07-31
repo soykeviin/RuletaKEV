@@ -191,5 +191,6 @@ h1 {
   .watermark {
     left: 10px;
     right: auto;
+    font-size: 0.39em;
   }
 }
