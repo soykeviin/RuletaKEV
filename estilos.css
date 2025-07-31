@@ -2,16 +2,12 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
 }
 body {
-  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-  background-image: url('fondo.png'), linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-  background-size: cover, cover;
-  background-position: center, center;
-  background-repeat: no-repeat, no-repeat;
+  /* El fondo se moverá al pseudo-elemento */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,6 +15,21 @@ body {
   justify-content: center;
   font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  background-image: url('fondo.png'), linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 1;
 }
 h1 {
   color: #1a237e;
@@ -118,17 +129,35 @@ h1 {
   font-weight: bold;
   text-shadow: 1px 1px 8px #fff, 0 0 4px #1976d2;
 }
+.fondo-fijo {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  background-image: url('fondo.png'), linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  opacity: 1;
+  pointer-events: none;
+}
 .watermark {
   position: fixed;
-  right: 12px;
-  bottom: 10px;
-  font-size: 0.95em;
+  bottom: 8px;
+  right: 10px;
+  font-size: 0.78em;
   color: #1a237e;
   opacity: 0.18;
   pointer-events: none;
   z-index: 100;
   font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
   user-select: none;
+}
+.watermark-izq {
+  left: 10px;
+  right: auto;
 }
 @media (max-width: 600px) {
   .ruleta {
@@ -158,5 +187,9 @@ h1 {
     width: 60px;
     height: 60px;
     font-size: 0.95em;
+  }
+  .watermark {
+    left: 10px;
+    right: auto;
   }
 }
