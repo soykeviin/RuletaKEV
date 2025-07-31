@@ -75,13 +75,10 @@ function girarRuleta() {
   if (girando) return;
   girando = true;
   premioDiv.textContent = '';
-  // Reproducir sonido solo si no está sonando
-  if (!audioPlaying) {
-    audio.currentTime = 0;
-    audio.play();
-    audioPlaying = true;
-    audio.onended = () => { audioPlaying = false; };
-  }
+  // Reproducir sonido SIEMPRE en el click, reiniciando el audio
+  audio.pause();
+  audio.currentTime = 0;
+  audio.play().catch(() => {}); // Ignora errores de autoplay
   const vueltas = Math.floor(Math.random() * 3) + 5; // 5-7 vueltas
   // Elegimos un ángulo final aleatorio
   const anguloPorPremio = 2 * Math.PI / premios.length;
@@ -111,8 +108,6 @@ function girarRuleta() {
       let anguloFlecha = (anguloOffsetFlecha - anguloTotal + 2 * Math.PI) % (2 * Math.PI);
       let premioIndex = Math.floor(anguloFlecha / anguloPorPremio) % premios.length;
       mostrarPremio(premioIndex);
-      // Permitir que el audio vuelva a sonar en el próximo giro
-      audioPlaying = false;
     }
   }
   requestAnimationFrame(animar);
